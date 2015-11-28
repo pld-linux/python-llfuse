@@ -8,7 +8,7 @@
 Summary:	Python bindings for the low level FUSE API
 Name:		python-%{module}
 Version:	0.40
-Release:	4
+Release:	5
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	https://python-llfuse.googlecode.com/files/llfuse-%{version}.tar.bz2
