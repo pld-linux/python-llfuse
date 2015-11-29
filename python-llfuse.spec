@@ -14,6 +14,7 @@ Group:		Libraries/Python
 Source0:	https://python-llfuse.googlecode.com/files/llfuse-%{version}.tar.bz2
 # Source0-md5:	bd8d07ddb6061ab03816e636efa37b5b
 URL:		https://code.google.com/p/python-llfuse/
+BuildRequires:	rpmbuild(macros) >= 1.710
 BuildRequires:	libfuse-devel >= 2.8.0
 BuildRequires:	rpm-pythonprov
 %if %{with python2}
