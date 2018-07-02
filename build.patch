@@ -1,0 +1,27 @@
+diff -ur llfuse-1.3.4.org/src/xattr.h llfuse-1.3.4/src/xattr.h
+--- llfuse-1.3.4.org/src/xattr.h	2016-05-24 02:53:33.000000000 +0200
++++ llfuse-1.3.4/src/xattr.h	2018-07-02 12:51:09.266369364 +0200
+@@ -25,7 +25,11 @@
+  * Linux
+  */
+ #if PLATFORM == PLATFORM_LINUX
+-#include <attr/xattr.h>
++#include <sys/xattr.h>
++
++#ifndef ENOATTR
++# define ENOATTR ENODATA        /* No such attribute */
++#endif
+ 
+ #define EXTATTR_NAMESPACE_USER 0
+ #define EXTATTR_NAMESPACE_SYSTEM 0
+--- llfuse-1.3.4/src/llfuse.c~	2018-04-29 18:08:28.000000000 +0200
++++ llfuse-1.3.4/src/llfuse.c	2018-07-02 13:27:07.169974273 +0200
+@@ -417,7 +417,7 @@ static CYTHON_INLINE void * PyThread_tss
+   #define __Pyx_PyUnicode_KIND(u)         (sizeof(Py_UNICODE))
+   #define __Pyx_PyUnicode_DATA(u)         ((void*)PyUnicode_AS_UNICODE(u))
+   #define __Pyx_PyUnicode_READ(k, d, i)   ((void)(k), (Py_UCS4)(((Py_UNICODE*)d)[i]))
+-  #define __Pyx_PyUnicode_WRITE(k, d, i, ch)  (((void)(k)), ((Py_UNICODE*)d)[i] = ch)
++  #define __Pyx_PyUnicode_WRITE(k, d, i, ch)  (((void)(k)), ((Py_UNICODE*)d)[i] = (Py_UNICODE)ch)
+   #define __Pyx_PyUnicode_IS_TRUE(u)      (0 != PyUnicode_GET_SIZE(u))
+ #endif
+ #if CYTHON_COMPILING_IN_PYPY

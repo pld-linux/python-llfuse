@@ -7,23 +7,26 @@
 %define 	module	llfuse
 Summary:	Python bindings for the low level FUSE API
 Name:		python-%{module}
-Version:	0.40
-Release:	7
+Version:	1.3.4
+Release:	1
 License:	GPL v2
 Group:		Libraries/Python
-Source0:	https://python-llfuse.googlecode.com/files/llfuse-%{version}.tar.bz2
-# Source0-md5:	bd8d07ddb6061ab03816e636efa37b5b
-URL:		https://code.google.com/p/python-llfuse/
+Source0:	https://bitbucket.org/nikratio/python-llfuse/downloads/%{module}-%{version}.tar.bz2
+# Source0-md5:	43a123c46d5438f15cd6bcafa16a0094
+Patch0:		build.patch
+URL:		https://github.com/python-llfuse/python-llfuse
 BuildRequires:	rpmbuild(macros) >= 1.710
 BuildRequires:	libfuse-devel >= 2.8.0
 BuildRequires:	rpm-pythonprov
 %if %{with python2}
 BuildRequires:	python-devel
 BuildRequires:	python-distribute
+BuildRequires:	python-contextlib2
 %endif
 %if %{with python3}
 BuildRequires:	python3-devel
 BuildRequires:	python3-distribute
+BuildRequires:	python3-contextlib2
 BuildRequires:	python3-modules
 %endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -51,6 +54,7 @@ Dokumentacja API %{module}.
 
 %prep
 %setup -q -n %{module}-%{version}
+%patch0 -p1
 
 %build
 %if %{with python2}
@@ -98,10 +102,8 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc Changes.txt
-%dir %{py_sitedir}/llfuse
-%{py_sitedir}/llfuse/*.py[co]
-%attr(755,root,root) %{py_sitedir}/llfuse/*.so
+%doc Changes.rst
+%attr(755,root,root) %{py_sitedir}/%{module}.so
 %if "%{py_ver}" > "2.4"
 %{py_sitedir}/llfuse-*.egg-info
 %endif
@@ -111,11 +113,8 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files -n python3-%{module}
 %defattr(644,root,root,755)
-%doc Changes.txt
-%dir %{py3_sitedir}/%{module}
-%{py3_sitedir}/%{module}/*.py*
-%{py3_sitedir}/%{module}/__pycache__
-%attr(755,root,root) %{py3_sitedir}/%{module}/capi*.so
+%doc Changes.rst
+%attr(755,root,root) %{py3_sitedir}/%{module}.*.so
 %{py3_sitedir}/%{module}-%{version}-py*.egg-info
 %{_examplesdir}/python3-%{module}-%{version}
 %endif
