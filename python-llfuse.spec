@@ -14,10 +14,12 @@ Group:		Libraries/Python
 Source0:	https://bitbucket.org/nikratio/python-llfuse/downloads/%{module}-%{version}.tar.bz2
 # Source0-md5:	43a123c46d5438f15cd6bcafa16a0094
 Patch0:		build.patch
+Patch1:		x32.patch
 URL:		https://github.com/python-llfuse/python-llfuse
 BuildRequires:	rpmbuild(macros) >= 1.710
 BuildRequires:	libfuse-devel >= 2.8.0
 BuildRequires:	rpm-pythonprov
+BuildRequires:	python-Cython
 %if %{with python2}
 BuildRequires:	python-devel
 BuildRequires:	python-distribute
@@ -55,8 +57,13 @@ Dokumentacja API %{module}.
 %prep
 %setup -q -n %{module}-%{version}
 %patch0 -p1
+%ifarch x32
+%patch1 -p1
+%endif
 
 %build
+./setup.py build_cython
+
 %if %{with python2}
 %py_build %{?with_tests:test}
 %endif
