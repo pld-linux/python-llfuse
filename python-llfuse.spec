@@ -4,11 +4,11 @@
 %bcond_without	python2 # CPython 2.x module
 %bcond_without	python3 # CPython 3.x module
 
-%define 	module	llfuse
+%define		module	llfuse
 Summary:	Python bindings for the low level FUSE API
 Name:		python-%{module}
 Version:	1.3.4
-Release:	1
+Release:	2
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	https://bitbucket.org/nikratio/python-llfuse/downloads/%{module}-%{version}.tar.bz2
