@@ -7,14 +7,13 @@
 %define		module	llfuse
 Summary:	Python bindings for the low level FUSE API
 Name:		python-%{module}
-Version:	1.3.4
-Release:	3
+Version:	1.3.6
+Release:	1
 License:	GPL v2
 Group:		Libraries/Python
-Source0:	https://bitbucket.org/nikratio/python-llfuse/downloads/%{module}-%{version}.tar.bz2
-# Source0-md5:	43a123c46d5438f15cd6bcafa16a0094
-Patch0:		build.patch
-Patch1:		x32.patch
+Source0:	https://pypi.debian.net/llfuse/%{module}-%{version}.tar.bz2
+# Source0-md5:	4996674fa327c6c93174c1f71961ac6c
+Patch0:		x32.patch
 URL:		https://github.com/python-llfuse/python-llfuse
 BuildRequires:	rpmbuild(macros) >= 1.710
 BuildRequires:	libfuse-devel >= 2.8.0
@@ -56,9 +55,8 @@ Dokumentacja API %{module}.
 
 %prep
 %setup -q -n %{module}-%{version}
-%patch0 -p1
 %ifarch x32
-%patch1 -p1
+%patch0 -p1
 %endif
 
 %build
