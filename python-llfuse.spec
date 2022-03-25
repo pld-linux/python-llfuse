@@ -8,7 +8,7 @@
 Summary:	Python bindings for the low level FUSE API
 Name:		python-%{module}
 Version:	1.3.6
-Release:	4
+Release:	5
 License:	GPL v2
 Group:		Libraries/Python
 Source0:	https://pypi.debian.net/llfuse/%{module}-%{version}.tar.bz2
