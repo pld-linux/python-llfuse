@@ -26,7 +26,6 @@ BuildRequires:	python-contextlib2
 %endif
 %if %{with python3}
 BuildRequires:	python3-devel
-BuildRequires:	python3-distribute
 BuildRequires:	python3-contextlib2
 BuildRequires:	python3-modules
 %endif
